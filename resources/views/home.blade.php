@@ -7,18 +7,14 @@
             <div class="card">
                 <div class="card-header">TELEVISIONS:</div>
                 <div>
-                  <input type="checkbox" name="price">
-                  <label for="price">Price Best of</label>
+                  <input id="price_best" type="checkbox" name="price_best">
+                  <label for="price_best">Price Best of</label>
                 </div>
 
                 <div class="card-body">
-                  <ul>
+                  <ul id="televisions">
 
                   </ul>
-                    <br><br>
-                    <a class="btn btn-primary" href="{{-- {{route('television.create')}} --}}">
-                      CREATE
-                    </a>
                 </div>
             </div>
         </div>

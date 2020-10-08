@@ -30220,15 +30220,40 @@ window.$ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.
 $(document).ready(init);
 
 function init() {
-  getData();
+  addPriceBestListener();
+  getData(false);
 }
 
-function getData() {
+function addPriceBestListener() {
+  var target = $("#price_best");
+  target.change(priceBestToogle);
+}
+
+function priceBestToogle() {
+  var check = $(this);
+  var isChecked = check.is(":checked");
+  getData(isChecked);
+}
+
+function getData(price_best) {
+  var url = '/api/televisions/all';
+
+  if (price_best) {
+    url = '/api/televisions/price_best';
+  }
+
   $.ajax({
-    url: "http://127.0.0.1:8000/api/televisions/all",
+    url: url,
     method: "GET",
-    success: function success(data) {
-      console.log("data", data);
+    success: function success(televisions) {
+      var target = $("#televisions");
+      target.html("");
+
+      for (var i = 0; i < televisions.length; i++) {
+        var television = televisions[i];
+        var html = "<li>" + television['name'] + ": " + television['price'] + "</li>";
+        target.append(html);
+      }
     },
     error: function error(err) {
       console.log("error", err);
